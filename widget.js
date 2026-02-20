@@ -1210,6 +1210,10 @@ async function submitEmail() {
   const totals = state.totals || calculateTotals();
 
   const payload = {
+    to_email: "studio@vesperdesign.com",
+    reply_to: state.email,
+    from_name: state.name,
+    
     name: state.name,
     email: state.email,
     phone: state.phone,
@@ -1299,3 +1303,4 @@ function buildPlainTextSummary(totals) {
 
   return lines.join("\n");
 }
+
