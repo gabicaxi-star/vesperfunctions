@@ -3,7 +3,6 @@ const COL_BG = "#F7F4EE";
 const COL_CARD = "#FFFDF8";
 const COL_CARD_SHADOW = "rgba(0,0,0,0.12)";
 const COL_TEXT = "#2A2A28";
-const COL_ACCENT = "#D8B4A0";
 
 let step = 0;
 const TOTAL_STEPS = 6;
@@ -14,13 +13,16 @@ let cardX, cardY, cardW, cardH;
 // Inputs grouped by step
 let stepInputs = [[], [], [], [], [], []];
 
+// Step 0 inputs
+let occasionSelect, dateInput, timeInput;
+
 // Navigation buttons
 let nextBtn, backBtn;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  // Create inputs for Step 0 as an example
+  // Create inputs for each step
   createStep0Inputs();
 
   // Create nav buttons (shared across steps)
@@ -39,10 +41,10 @@ function draw() {
 
 // ===== Responsive card geometry =====
 function computeCardGeometry() {
-  // Card scales as a percentage of canvas
+  // Card scales as a percentage of canvas (A2-a)
   cardW = width * 0.8;
   let desiredH = height * 0.85;
-  cardH = min(desiredH, 700); // T2: cap height
+  cardH = Math.min(desiredH, 700); // T2: cap height
   cardX = (width - cardW) / 2;
   cardY = (height - cardH) / 2;
 }
@@ -71,14 +73,25 @@ function drawStepHeader() {
 
   textAlign(LEFT, TOP);
   textSize(22);
-  text("Tell us about your event", cardX + 24, cardY + 24 + 24);
+
+  let title = "";
+  let subtitle = "This helps us understand the vibe and timing of your gathering.";
+
+  if (step === 0) title = "Tell us about your event";
+  else if (step === 1) title = "Guest count & flow";
+  else if (step === 2) title = "Food & beverage details";
+  else if (step === 3) title = "Activities & add-ons";
+  else if (step === 4) title = "Logistics & timing";
+  else if (step === 5) title = "Contact & confirmation";
+
+  text(title, cardX + 24, cardY + 48);
 
   textSize(13);
   fill(0, 0, 0, 180);
   text(
-    "This helps us understand the vibe and timing of your gathering.",
+    subtitle,
     cardX + 24,
-    cardY + 24 + 24 + 30
+    cardY + 48 + 30
   );
 }
 
@@ -116,9 +129,9 @@ function hideAllInputs() {
   }
 }
 
-// ===== Step 0: Occasion, Date, Time (example) =====
-let occasionSelect, dateInput, timeInput;
-
+// =========================
+// STEP 0: Occasion, Date, Time
+// =========================
 function createStep0Inputs() {
   occasionSelect = createSelect();
   occasionSelect.option("Bridal Shower");
@@ -141,7 +154,6 @@ function drawStep0() {
   textAlign(LEFT, TOP);
   textSize(13);
 
-  // Labels
   const labelX = cardX + cardW * 0.08;
   let y = cardY + cardH * 0.24;
 
@@ -166,9 +178,9 @@ function drawStep0() {
   );
 }
 
-// ===== Step 1–5 placeholders =====
-// You can wire your existing logic into these using placeInput()
-// and the same card-relative layout pattern.
+// =========================
+// STEP 1–5: placeholders
+// =========================
 
 function drawStep1() {
   fill(COL_TEXT);
@@ -205,7 +217,9 @@ function drawStep5() {
   text("Step 6 content goes here", cardX + 24, cardY + cardH * 0.25);
 }
 
-// ===== Navigation buttons =====
+// =========================
+// Navigation buttons
+// =========================
 function createNavButtons() {
   nextBtn = createButton("Next");
   backBtn = createButton("Back");
@@ -240,7 +254,9 @@ function positionNavButtons() {
   }
 }
 
-// ===== Handle window resize =====
+// =========================
+// Handle window resize
+// =========================
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
