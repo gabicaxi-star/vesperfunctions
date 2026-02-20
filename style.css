@@ -1,0 +1,66 @@
+body {
+  margin:  0;
+  padding: 20;
+  background: #F7F4EE;
+  font-family: "Lora", Georgia, serif;
+  color: #2A2A28;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 40;
+}
+
+#sketch-container {
+  position: relative;
+}
+
+/* p5 canvas */
+canvas {
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+/* Form elements */
+select,
+input,
+textarea {
+  font-family: "Lora", Georgia, serif;
+  font-size: 13px;
+  background: #FAF8F2;
+  border: 1px solid #D8D3C8;
+  padding: 4px 8px;
+  border-radius: 6px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 9999 !important;
+  
+}
+
+textarea {
+  resize: vertical;
+}
+
+input[type="checkbox"] {
+  width: auto;
+  margin-right: 6px;
+  z-index: 9999 !important;
+}
+select {
+  position: absolute !important;
+  z-index: 99999 !important;
+  background: #FAF8F2 !important;
+  border: 1px solid #D8D3C8 !important;
+}
+
+select option {
+  background: #FAF8F2 !important;
+  color: #2A2A28 !important;
+  z-index: 99999 !important;
+}
+label {
+  font-size: 13px;
+}
