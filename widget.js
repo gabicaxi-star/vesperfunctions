@@ -1,53 +1,76 @@
-// widget.js
+// Widget Skeleton
 
-const Widget = () => {
-    return (
-        <div className="widget">
-            <h2>Event Widget</h2>
-            <form>
-                {/* Occasion */}
-                <label htmlFor="occasion">Occasion:</label>
-                <input type="text" id="occasion" name="occasion" required />
+// Occasion Field
+const occasionField = document.createElement('input');
+occasionField.type = 'text';
+occasionField.placeholder = 'Occasion';
 
-                {/* Location */}
-                <label htmlFor="location">Location:</label>
-                <input type="text" id="location" name="location" placeholder="Full Address" required />
+// Location Fields
+const streetField = document.createElement('input');
+streetField.type = 'text';
+streetField.placeholder = 'Street';
+const cityField = document.createElement('input');
+cityField.type = 'text';
+cityField.placeholder = 'City';
+const stateField = document.createElement('input');
+stateField.type = 'text';
+stateField.placeholder = 'State';
+const zipField = document.createElement('input');
+zipField.type = 'text';
+zipField.placeholder = 'Zip Code';
 
-                {/* Guests */}
-                <label htmlFor="guests">Number of Guests:</label>
-                <input type="number" id="guests" name="guests" min="1" required />
+// Guests Field
+const guestsField = document.createElement('input');
+guestsField.type = 'number';
+guestsField.placeholder = 'Number of Guests';
 
-                {/* Experience */}
-                <label htmlFor="experience">Experience:</label>
-                <textarea id="experience" name="experience" placeholder="Describe the experience" required></textarea>
+// Experience Field
+const experienceField = document.createElement('textarea');
+experienceField.placeholder = 'Experience Description';
 
-                {/* Contact Information */}
-                <label htmlFor="contact">Contact Information:</label>
-                <input type="email" id="contact" name="contact" placeholder="Email" required />
+// Contact Field
+const contactField = document.createElement('input');
+contactField.type = 'text';
+contactField.placeholder = 'Contact Information';
 
-                {/* Review Section */}
-                <label htmlFor="review">Review:</label>
-                <textarea id="review" name="review" placeholder="Leave your review here"></textarea>
+// Dietary Checkboxes with Disabled Count Inputs
+const dietaryOptions = ['Vegan','Vegetarian','Gluten-Free'];
+const dietaryCheckboxes = {}; // Object to hold dietary checkbox elements
+for (const option of dietaryOptions) {
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.id = option;
+    checkbox.disabled = true; // Start as disabled
 
-                {/* Dietary Preferences */}
-                <fieldset>
-                    <legend>Dietary Preferences:</legend>
-                    <label><input type="checkbox" name="dietary[]" value="vegetarian" /> Vegetarian</label>
-                    <label><input type="checkbox" name="dietary[]" value="vegan" /> Vegan</label>
-                    <label><input type="checkbox" name="dietary[]" value="gluten-free" /> Gluten-Free</label>
-                </fieldset>
+    const countInput = document.createElement('input');
+    countInput.type = 'number';
+    countInput.placeholder = 'Count';
+    countInput.disabled = true; // Start as disabled
 
-                {/* Placeholders for Future Updates */}
-                <div>
-                    <p>Pricing: [Placeholder]</p>
-                    <p>Travel Fee: [Placeholder]</p>
-                    <p>Email Sending: [Placeholder]</p>
-                </div>
+    checkbox.addEventListener('change', function() {
+        countInput.disabled = !this.checked; // Enable count input when checked
+    });
 
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-    );
-};
+    dietaryCheckboxes[option] = { checkbox, countInput };
+}
 
-export default Widget;
+// Review Step with Placeholder for Estimate/Travel Fee
+const reviewSection = document.createElement('div');
+const estimateField = document.createElement('p');
+estimateField.textContent = 'Estimate/Travel Fee: $_____'; // Placeholder for estimate
+reviewSection.appendChild(estimateField);
+
+// Function to assemble all fields into a form
+function assembleWidget() {
+    const form = document.createElement('form');
+    form.append(occasionField, streetField, cityField, stateField, zipField, guestsField, experienceField, contactField);
+    Object.values(dietaryCheckboxes).forEach(({ checkbox, countInput }) => {
+        form.append(checkbox, countInput);
+    });
+    form.appendChild(reviewSection);
+    return form;
+}
+
+// Call the function to create the widget
+const widget = assembleWidget();
+document.body.appendChild(widget);
