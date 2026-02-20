@@ -1,0 +1,79 @@
+body {
+  background: #F7F4EE;
+  font-family: 'Lora', Georgia, serif;
+  color: #2A2A28;
+  margin: 0;
+  padding: 0;
+}
+
+#event-widget-root {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.widget-card {
+  background: #FAF8F2;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  padding: 2.5rem 2rem;
+  max-width: 480px;
+  width: 100%;
+  margin: 2rem auto;
+  box-sizing: border-box;
+}
+
+.widget-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.widget-card label {
+  display: block;
+  margin-top: 1.2rem;
+  margin-bottom: 0.3rem;
+  font-size: 1rem;
+}
+
+.widget-card input,
+.widget-card select,
+.widget-card textarea {
+  width: 100%;
+  padding: 0.6em 1em;
+  border: 1px solid #D8D3C8;
+  border-radius: 6px;
+  font-family: 'Lora', Georgia, serif;
+  font-size: 1rem;
+  background: #FAF8F2;
+  color: #2A2A28;
+  margin-bottom: 0.5rem;
+  box-sizing: border-box;
+}
+
+.widget-card button {
+  background: #2A2A28;
+  color: #FAF8F2;
+  border: none;
+  border-radius: 999px;
+  padding: 0.7em 2em;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  float: right;
+}
+
+.widget-card .step-indicator {
+  text-align: right;
+  font-size: 0.95rem;
+  color: #888;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .widget-card {
+    padding: 1.2rem 0.5rem;
+    max-width: 98vw;
+  }
+}
