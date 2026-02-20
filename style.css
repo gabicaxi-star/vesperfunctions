@@ -1,0 +1,70 @@
+body {
+  margin:  0;
+  padding: 20;
+  background: #F7F4EE;
+  font-family: "Lora", Georgia, serif;
+  color: #2A2A28;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 40;
+}
+
+#sketch-container {
+  position: relative;
+}
+
+/* p5 canvas */
+canvas {
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+/* Form elements */
+select,
+input,
+textarea {
+  font-family: "Lora", Georgia, serif;
+  font-size: 13px;
+  background: #FAF8F2;
+  border: 1px solid #D8D3C8;
+  padding: 4px 8px;
+  border-radius: 6px;
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 10;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input[type="checkbox"] {
+  width: auto;
+  margin-right: 6px;
+}
+
+select {
+  position: relative;
+  z-index: 10;
+  background: #FAF8F2;
+  border: 1px solid #D8D3C8;
+  min-width: 120px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  font-size: 1.1rem;
+  padding: 0.5em 1em;
+}
+
+select option {
+  background: #FAF8F2;
+  color: #2A2A28;
+}
+label {
+  font-size: 13px;
+}
