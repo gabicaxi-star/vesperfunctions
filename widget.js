@@ -80,6 +80,7 @@ function renderStepContent() {
     case 'review': return renderStepReview();
     default: return document.createTextNode('');
   }
+}
 // Step 6: Review and submit
 function renderStepReview() {
   const frag = document.createDocumentFragment();
@@ -501,7 +502,6 @@ function renderStepLocation() {
   frag.appendChild(navDiv);
 
   return frag;
-}
 }
 
 function renderStepOccasion() {
