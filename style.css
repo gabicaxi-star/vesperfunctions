@@ -36,8 +36,6 @@ textarea {
   border-radius: 6px;
   box-sizing: border-box;
   position: relative;
-  z-index: 9999 !important;
-  
 }
 
 textarea {
@@ -47,7 +45,7 @@ textarea {
 input[type="checkbox"] {
   width: auto;
   margin-right: 6px;
-  z-index: 9999 !important;
+}
 }
 select {
   position: relative;

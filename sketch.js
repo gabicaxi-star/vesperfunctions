@@ -64,10 +64,18 @@ let isCalculatingDistance = false;
 let distanceError = "";
 
 function setup() {
-  let c = createCanvas(windowWidth, 600);
+  let canvasH = Math.max(windowHeight, 600);
+  if (windowWidth < 700) canvasH = windowHeight;
+  let c = createCanvas(windowWidth, canvasH);
   c.parent("sketch-container");
   textFont("Lora");
   setupInputs();
+
+  windowResized = function() {
+    let canvasH = Math.max(windowHeight, 600);
+    if (windowWidth < 700) canvasH = windowHeight;
+    resizeCanvas(windowWidth, canvasH);
+  };
 }
 function relX(percent) {
   return width * percent;
@@ -154,6 +162,13 @@ function setupInputs() {
   inputs.name = createInput();
   inputs.email = createInput();
   inputs.phone = createInput();
+  inputs.phone.attribute("type", "tel");
+  inputs.phone.attribute("pattern", "[0-9]{10,}");
+  inputs.phone.input(() => {
+    // Remove non-numeric characters
+    let val = inputs.phone.value().replace(/[^0-9]/g, "");
+    inputs.phone.value(val);
+  });
   inputs.notes = createElement("textarea");
 
   for (let key in inputs) inputs[key].hide();
@@ -394,18 +409,15 @@ function drawStep2() {
 function drawStep3() {
   let x = 90, y = 70;
 
-  textSize(24);
-  text("Build your event experience", x, y);
-  textSize(13);
-  fill(80);
-  text("Choose your crafts and any additional elements you’d like us to include.", x, y + 32);
-
   fill(COL_TEXT);
   textSize(14);
   text("Crafts", x, y + 80);
   positionInput(inputs.craftCandle, x, y + 100);
+  text("Candle Making", x + 30, y + 105);
   positionInput(inputs.craftJewelry, x, y + 130);
+  text("Jewelry / Charm Making", x + 30, y + 135);
   positionInput(inputs.craftSoap, x, y + 160);
+  text("Soap Making", x + 30, y + 165);
 
   form.crafts.candle = inputs.craftCandle.checked();
   form.crafts.jewelry = inputs.craftJewelry.checked();
@@ -417,23 +429,73 @@ function drawStep3() {
   if (form.location === "studio") {
     text("Studio add-ons", x + 380, y + 80);
     positionInput(inputs.goodieBags, x + 380, y + 100);
+    text("Goodie Bags", x + 410, y + 105);
     positionInput(inputs.decorations, x + 380, y + 130);
+    text("Decorations", x + 410, y + 135);
 
     textSize(12);
     fill(90);
     text("Catering options:", x + 380, y + 160);
-
     fill(COL_TEXT);
     textSize(13);
     positionInput(inputs.cateringBrunch, x + 380, y + 180);
+    text("Brunch – French breakfast pastries", x + 410, y + 185);
     positionInput(inputs.cateringLunch, x + 380, y + 210);
+    text("Lunch – sandwiches & artisan cheese trays", x + 410, y + 215);
     positionInput(inputs.cateringDessert, x + 380, y + 240);
+    text("French confection dessert", x + 410, y + 245);
 
+    // Dietary checkboxes and number inputs
     textSize(13);
     fill(COL_TEXT);
-    text("Additional dietary meals (gluten free, vegetarian, vegan)", x + 380, y + 280);
-    positionInput(inputs.extraDietary, x + 380, y + 300, 80);
+    text("Additional dietary meals", x + 380, y + 280);
+    // Vegan
+    positionInput(inputs.dietVegan = createCheckbox("Vegan", false), x + 380, y + 300);
+    positionInput(inputs.dietVeganCount = createInput("", "number"), x + 480, y + 300, 60);
+    inputs.dietVeganCount.attribute("min", "0");
+    inputs.dietVeganCount.attribute("disabled", !inputs.dietVegan.checked());
+    inputs.dietVegan.changed(() => {
+      inputs.dietVeganCount.attribute("disabled", !inputs.dietVegan.checked());
+      if (!inputs.dietVegan.checked()) inputs.dietVeganCount.value("");
+    });
+    inputs.dietVeganCount.input(() => {
+      let val = inputs.dietVeganCount.value().replace(/[^0-9]/g, "");
+      inputs.dietVeganCount.value(val);
+    });
+    // Gluten Free
+    positionInput(inputs.dietGluten = createCheckbox("Gluten Free", false), x + 380, y + 330);
+    positionInput(inputs.dietGlutenCount = createInput("", "number"), x + 480, y + 330, 60);
+    inputs.dietGlutenCount.attribute("min", "0");
+    inputs.dietGlutenCount.attribute("disabled", !inputs.dietGluten.checked());
+    inputs.dietGluten.changed(() => {
+      inputs.dietGlutenCount.attribute("disabled", !inputs.dietGluten.checked());
+      if (!inputs.dietGluten.checked()) inputs.dietGlutenCount.value("");
+    });
+    inputs.dietGlutenCount.input(() => {
+      let val = inputs.dietGlutenCount.value().replace(/[^0-9]/g, "");
+      inputs.dietGlutenCount.value(val);
+    });
+    // Vegetarian
+    positionInput(inputs.dietVegetarian = createCheckbox("Vegetarian", false), x + 380, y + 360);
+    positionInput(inputs.dietVegetarianCount = createInput("", "number"), x + 480, y + 360, 60);
+    inputs.dietVegetarianCount.attribute("min", "0");
+    inputs.dietVegetarianCount.attribute("disabled", !inputs.dietVegetarian.checked());
+    inputs.dietVegetarian.changed(() => {
+      inputs.dietVegetarianCount.attribute("disabled", !inputs.dietVegetarian.checked());
+      if (!inputs.dietVegetarian.checked()) inputs.dietVegetarianCount.value("");
+    });
+    inputs.dietVegetarianCount.input(() => {
+      let val = inputs.dietVegetarianCount.value().replace(/[^0-9]/g, "");
+      inputs.dietVegetarianCount.value(val);
+    });
 
+    textSize(11);
+    fill(90);
+    text("*Not guaranteed and may incur additional cost not specified in this estimate,\n based on caterer pricing and availability.", x + 380, y + 395);
+    textSize(11);
+    fill(90);
+    text("The studio does not provide cake or alcohol at this time.\nIf you would like to bring your own, please contact us to request accommodation.", x, height - 130);
+  }
     textSize(11);
     fill(90);
     text("*Not guaranteed and may incur additional cost not specified in this estimate,\n based on caterer pricing and availability.", x + 380, y + 325);
@@ -494,7 +556,7 @@ function drawStep4() {
   let x = 90, y = 70;
 
   textSize(24);
-    text("How can we reach you?", x, y);
+  text("How can we reach you?", x, y);
   textSize(13);
   fill(80);
   text("We’ll review your request and follow up to confirm details and availability.", x, y + 32);
@@ -502,17 +564,32 @@ function drawStep4() {
   fill(COL_TEXT);
   textSize(14);
 
-  text("Name *", x, y + 80);
-  positionInput(inputs.name, x, y + 100, 260);
+  // Crafts checkboxes and labels
+  let craftsY = y + 60;
+  text("Crafts", x, craftsY);
+  craftsY += 20;
+  positionInput(inputs.craftCandle, x, craftsY);
+  text("Candle Making", x + 30, craftsY + 5);
+  craftsY += 30;
+  positionInput(inputs.craftJewelry, x, craftsY);
+  text("Jewelry / Charm Making", x + 30, craftsY + 5);
+  craftsY += 30;
+  positionInput(inputs.craftSoap, x, craftsY);
+  text("Soap Making", x + 30, craftsY + 5);
 
-  text("Email *", x, y + 140);
-  positionInput(inputs.email, x, y + 160, 260);
+  // Contact info
+  let contactY = y + 180;
+  text("Name *", x, contactY);
+  positionInput(inputs.name, x, contactY + 20, 260);
 
-  text("Phone *", x, y + 200);
-  positionInput(inputs.phone, x, y + 220, 260);
+  text("Email *", x, contactY + 60);
+  positionInput(inputs.email, x, contactY + 80, 260);
 
-  text("Notes (optional)", x, y + 260);
-  positionInput(inputs.notes, x, y + 280, 400, 80);
+  text("Phone *", x, contactY + 120);
+  positionInput(inputs.phone, x, contactY + 140, 260);
+
+  text("Notes (optional)", x, contactY + 180);
+  positionInput(inputs.notes, x, contactY + 200, 400, 80);
 
   drawNavButtons({
     showBack: true,
@@ -525,6 +602,17 @@ function drawStep4() {
 
       if (!form.name || !form.email || !form.phone) {
         alert("Please fill in your name, email, and phone.");
+        return;
+      }
+      // Email validation
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(form.email)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+      // Phone validation (10+ digits)
+      if (!/^\d{10,}$/.test(form.phone)) {
+        alert("Please enter a valid phone number (10+ digits).");
         return;
       }
 
@@ -657,16 +745,17 @@ function drawStep5() {
   textSize(18);
   text(`$${form.total.toFixed(2)}`, totalBoxX + totalBoxW - 16, totalBoxY + totalBoxH / 2);
 
-  lineY = totalBoxY + totalBoxH + 20;
+  // Second column for Your Info
+  let infoX = totalBoxX + totalBoxW + 40;
+  let infoY = y + 80;
   textSize(13);
   textAlign(LEFT, TOP);
-
-  text("Your Info:", x, lineY); lineY += 18;
-  text(`Name: ${form.name}`, x + 20, lineY); lineY += 18;
-  text(`Email: ${form.email}`, x + 20, lineY); lineY += 18;
-  text(`Phone: ${form.phone}`, x + 20, lineY); lineY += 18;
+  text("Your Info:", infoX, infoY); infoY += 18;
+  text(`Name: ${form.name}`, infoX + 20, infoY); infoY += 18;
+  text(`Email: ${form.email}`, infoX + 20, infoY); infoY += 18;
+  text(`Phone: ${form.phone}`, infoX + 20, infoY); infoY += 18;
   if (form.notes) {
-    text(`Notes: ${form.notes}`, x + 20, lineY); lineY += 18;
+    text(`Notes: ${form.notes}`, infoX + 20, infoY); infoY += 18;
   }
 
   drawNavButtons({
