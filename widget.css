@@ -5,7 +5,6 @@
   --muted: #77736d;
   --border: #D8D3C8;
   --accent: #2A2A28;
-  --accentSoft: #ECE7DE;
   --danger: #b00020;
 }
 
@@ -83,9 +82,7 @@ html, body {
   .grid-2, .grid-3 { grid-template-columns: 1fr; }
 }
 
-.field {
-  margin-top: 14px;
-}
+.field { margin-top: 14px; }
 
 label {
   display: block;
@@ -122,9 +119,6 @@ textarea {
   gap: 10px;
 }
 
-.inline > * { flex: 1; }
-.inline .tight { flex: 0 0 auto; }
-
 .checkbox-row {
   display: grid;
   grid-template-columns: 22px 1fr;
@@ -137,6 +131,23 @@ textarea {
   margin-top: 10px;
 }
 .checkbox-row input[type="checkbox"]{
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+}
+
+.radio-row {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(0,0,0,0.015);
+  margin-top: 10px;
+}
+.radio-row input[type="radio"]{
   width: 18px;
   height: 18px;
   margin-top: 2px;
@@ -265,4 +276,19 @@ button.secondary {
   font-size: 0.9rem;
   color: var(--muted);
   line-height: 1.4;
+}
+
+.important-banner {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(108, 99, 255, 0.08);
+  color: #2b2b2b;
+  line-height: 1.35;
+}
+
+.important-banner strong {
+  display: block;
+  margin-bottom: 4px;
 }
