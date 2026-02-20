@@ -1,22 +1,53 @@
-// Patch 0 multi-step rendering skeleton
-// 6-step flow, off-site address fields, dietary checkbox rows, review page placeholder, no pricing or email sending yet
+// widget.js
 
-function multiStepRendering() {
-    // Step 1: User Information
-    // Collect user info
+const Widget = () => {
+    return (
+        <div className="widget">
+            <h2>Event Widget</h2>
+            <form>
+                {/* Occasion */}
+                <label htmlFor="occasion">Occasion:</label>
+                <input type="text" id="occasion" name="occasion" required />
 
-    // Step 2: Address Fields
-    // Collect address information
+                {/* Location */}
+                <label htmlFor="location">Location:</label>
+                <input type="text" id="location" name="location" placeholder="Full Address" required />
 
-    // Step 3: Dietary Preferences
-    // Present dietary checkbox options
+                {/* Guests */}
+                <label htmlFor="guests">Number of Guests:</label>
+                <input type="number" id="guests" name="guests" min="1" required />
 
-    // Step 4: Review Page
-    // Preview the information entered
+                {/* Experience */}
+                <label htmlFor="experience">Experience:</label>
+                <textarea id="experience" name="experience" placeholder="Describe the experience" required></textarea>
 
-    // Step 5: Confirmation
-    // Confirm the submission
+                {/* Contact Information */}
+                <label htmlFor="contact">Contact Information:</label>
+                <input type="email" id="contact" name="contact" placeholder="Email" required />
 
-    // Step 6: Thank you page
-    // Acknowledge the user for their submission
-}
+                {/* Review Section */}
+                <label htmlFor="review">Review:</label>
+                <textarea id="review" name="review" placeholder="Leave your review here"></textarea>
+
+                {/* Dietary Preferences */}
+                <fieldset>
+                    <legend>Dietary Preferences:</legend>
+                    <label><input type="checkbox" name="dietary[]" value="vegetarian" /> Vegetarian</label>
+                    <label><input type="checkbox" name="dietary[]" value="vegan" /> Vegan</label>
+                    <label><input type="checkbox" name="dietary[]" value="gluten-free" /> Gluten-Free</label>
+                </fieldset>
+
+                {/* Placeholders for Future Updates */}
+                <div>
+                    <p>Pricing: [Placeholder]</p>
+                    <p>Travel Fee: [Placeholder]</p>
+                    <p>Email Sending: [Placeholder]</p>
+                </div>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    );
+};
+
+export default Widget;
