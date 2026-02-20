@@ -548,7 +548,7 @@ function drawStep3() {
       step = 4;
     }
   });
-
+}
 
 // ====== STEP 4 ======
 
@@ -1060,4 +1060,5 @@ Customer Info:
 - Notes: ${form.notes || "None"}
 `
   };
+
 }
