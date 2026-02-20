@@ -1,75 +1,66 @@
-/* ===== Global reset ===== */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html,
 body {
-  width: 100%;
-  height: 100%;
-  background: #f7f4ee;
+  margin:  0;
+  padding: 20;
+  background: #F7F4EE;
   font-family: "Lora", Georgia, serif;
-  overflow: hidden;
+  color: #2A2A28;
 }
 
-/* ===== Canvas ===== */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 40;
+}
+
+#sketch-container {
+  position: relative;
+}
+
+/* p5 canvas */
 canvas {
   display: block;
+  position: relative;
+  z-index: 1;
 }
 
-/* ===== Form elements (p5-created HTML) ===== */
-input,
+/* Form elements */
 select,
-textarea,
-button {
-  position: absolute;
+input,
+textarea {
   font-family: "Lora", Georgia, serif;
-  font-size: 14px;
-  background: #faf8f2;
-  border: 1px solid #d8d3c8;
-  padding: 6px 10px;
+  font-size: 13px;
+  background: #FAF8F2;
+  border: 1px solid #D8D3C8;
+  padding: 4px 8px;
   border-radius: 6px;
-  color: #2a2a28;
-  z-index: 10;
-}
-
-select {
-  cursor: pointer;
-}
-
-select option {
-  background: #faf8f2;
-  color: #2a2a28;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 9999 !important;
+  
 }
 
 textarea {
   resize: vertical;
-  min-height: 60px;
 }
 
-button {
-  background: #2a2a28;
-  color: #faf8f2;
-  border-radius: 999px;
-  border: none;
-  cursor: pointer;
-  padding: 8px 18px;
+input[type="checkbox"] {
+  width: auto;
+  margin-right: 6px;
+  z-index: 9999 !important;
+}
+select {
+  position: absolute !important;
+  z-index: 99999 !important;
+  background: #FAF8F2 !important;
+  border: 1px solid #D8D3C8 !important;
 }
 
-button:disabled {
-  opacity: 0.4;
-  cursor: default;
+select option {
+  background: #FAF8F2 !important;
+  color: #2A2A28 !important;
+  z-index: 99999 !important;
 }
-
-/* Smaller tweaks on narrow screens */
-@media (max-width: 600px) {
-  input,
-  select,
-  textarea,
-  button {
-    font-size: 12px;
-    padding: 5px 8px;
-  }
+label {
+  font-size: 13px;
 }
