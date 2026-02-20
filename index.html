@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vesper Design – Private Event Quote</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Lora via Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main>
+    <div id="sketch-container"></div>
+  </main>
+
+  <!-- p5.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("template_trnx5um"); // replace with your EmailJS public key
+    })();
+  </script>
+
+  <!-- Sketch -->
+  <script src="sketch.js"></script>
+</body>
+</html>
